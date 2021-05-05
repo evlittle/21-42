@@ -11,7 +11,7 @@ LIST = 		ft_isalnum.c		ft_isalpha.c		ft_isascii.c\
 			ft_strlcat.c		ft_atoi.c			ft_calloc.c\
 			ft_strdup.c			ft_putendl_fd.c		ft_substr.c\
 			ft_strjoin.c		ft_strtrim.c		ft_strmapi.c\
-			ft_itoa.c\
+			ft_itoa.c			ft_split.c\
 
 OBJ = $(LIST:%.c=%.o)
 
