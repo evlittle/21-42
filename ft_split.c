@@ -1,5 +1,4 @@
 #include "libft.h"
-#include <stdio.h>
 
 static int 	words_counter(const char *s, char c)
 {
@@ -42,12 +41,12 @@ static char **fill(char const *s, char c, char **array, size_t words)
 
 	i = 0;
 	k = 0;
-	while(k < words && s[i])
+	while (k < words && s[i])
 	{
-		if(s[i] != c)
+		if (s[i] != c)
 		{
 			l = 0;
-			while(s[i] != c && s[i])
+			while (s[i] != c && s[i])
 			{
 				array[k][l] = s[i];
 				l++;
@@ -58,7 +57,7 @@ static char **fill(char const *s, char c, char **array, size_t words)
 		}
 	i++;
 	}
-	return(array);
+	return (array);
 }
 
 
@@ -100,7 +99,8 @@ char	**ft_split(char const *s, char c)
 	if(!s)
 		return(0);
 	words = words_counter(s, c);  // вычисляем количество строк
-	if(!(array = malloc(sizeof(char*) * (words + 1))))
+	array = malloc(sizeof(char*) * (words + 1));
+	if(!array)
 		return(0);
 	array[words] = NULL;
 	array = allocate(s, c, array, words);
