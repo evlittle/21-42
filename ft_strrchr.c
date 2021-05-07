@@ -2,16 +2,16 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
-	while(i >= 0)
+	while (i >= 0)
 	{	
-		if(s[i] == c)
-			return((char*)(s + i));
+		if (s[i] == (unsigned char)c)
+			return ((char *)(s + i));
 		i--;
 	}
-	return(0);
+	return (0);
 }

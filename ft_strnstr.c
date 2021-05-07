@@ -3,21 +3,21 @@
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
-	size_t 	k;
+	size_t	k;
 
 	i = 0;
-	k = 0;
 	if (needle[i] == '\0')
-		return((char *)haystack);
+		return ((char *)haystack);
 	while (i < len && haystack[i])
 	{
+		k = 0;
 		if (needle[k] == haystack[i])
 		{
-			while (haystack[i + k] == needle[k] && len--)
+			while (haystack[i + k] == needle[k] && i + k < len)
 			{
 				k++;
 				if (needle[k] == 0)
-					return((char*)(haystack + i));
+					return ((char *)(haystack + i));
 			}
 		}
 		i++;

@@ -2,42 +2,41 @@
 
 static int 	words_counter(const char *s, char c)
 {
-	size_t i;
-	size_t words;
-	size_t max;
+	size_t	i;
+	size_t	words;
+	size_t	max;
 
 	max = ft_strlen(s);
 	i = 0;
 	words = 0;
-	while((s[i] == c) && s[i]) // доводим счетчик до начала до первого символа слова в строке
+	while ((s[i] == c) && s[i])
 		i++;
-	if(i == max)
-		return(0);
-	while(s[++i]) // идем по слову до его последнего символа и прибавляем к words + 1
+	if (i == max)
+		return (0);
+	while (s[++i])
 	{
 		if ((s[i] != c) && (s[i + 1] == c || s[i + 1] == '\0'))
 			words++;
 	}
-	return(words);
+	return (words);
 }
 
-static char **free_array(char **array)
+static	char	**free_array(char **array)
 {
-	while(*array)
+	while (*array)
 	{
 		free(*array);
 		array++;
 	}
 	*array = NULL;
-	return(array);
+	return (array);
 }
 
-
-static char **fill(char const *s, char c, char **array, size_t words)
+static char	**fill(char const *s, char c, char **array, size_t words)
 {
-	size_t i;
-	size_t k;
-	size_t l;
+	size_t	i;
+	size_t	k;
+	size_t	l;
 
 	i = 0;
 	k = 0;
@@ -55,69 +54,53 @@ static char **fill(char const *s, char c, char **array, size_t words)
 			array[k][l] = '\0';
 			k++;
 		}
-	i++;
+		i++;
 	}
 	return (array);
 }
 
-
 static char	**allocate(const char *s, char c, char **array, size_t words)
 {
-	size_t k;
-	size_t i;
-	size_t lenghtword;
+	size_t	k;
+	size_t	i;
+	size_t	lenghtword;
 
 	k = 0;
 	i = -1;
-	while(k < words && s[++i]) // пока не выделим память для каждого слова и строка не дойдет до конца
-	{	
-		lenghtword = 0;  
-		while(s[i] != c && s[i])
+	while (k < words && s[++i])
+	{
+		lenghtword = 0;
+		while (s[i] != c && s[i])
 		{
-			lenghtword++; // считаем длинну слова
-			i++; // идем дальше по строке
+			lenghtword++;
+			i++;
 		}
-		if(lenghtword != 0)
+		if (lenghtword != 0)
 		{
-			array[k] = malloc(sizeof(char) * (lenghtword + 1)); // 
-			if(!array)
+			array[k++] = malloc(sizeof(char) * (lenghtword + 1));
+			if (!array)
 			{
 				array = free_array(array);
-				return(array);
+				return (array);
 			}
-			k++;
 		}
 	}
-	return(array);
+	return (array);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t words;
-	char **array;
+	size_t	words;
+	char	**array;
 
-	if(!s)
-		return(0);
-	words = words_counter(s, c);  // вычисляем количество строк
-	array = malloc(sizeof(char*) * (words + 1));
-	if(!array)
-		return(0);
+	if (!s)
+		return (0);
+	words = words_counter(s, c);
+	array = malloc(sizeof(char *) * (words + 1));
+	if (!array)
+		return (0);
 	array[words] = NULL;
 	array = allocate(s, c, array, words);
 	array = fill(s, c, array, words);
-	return(array);
+	return (array);
 }
-
-// int main()
-// {
-// 	int i,j;
-// 	i = 0;
-// 	char *s = "  split this    ";
-// 	char **result = ft_split(s, 32);
-// 	while(result[i])
-// 	{
-// 		printf("%s\n", result[i]);
-// 		i++;
-// 	}
-// 	return(0);
-// }
